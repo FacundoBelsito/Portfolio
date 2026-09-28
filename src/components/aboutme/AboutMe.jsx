@@ -1,50 +1,55 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { FiDownload } from 'react-icons/fi';
+import { useLanguage } from '../../i18n/LanguageContext';
+import SectionTitle from '../common/SectionTitle';
+import Reveal from '../common/Reveal';
+import { LINKS } from '../common/links';
 import './AboutMe.css';
-import { GoArrowLeft } from "react-icons/go";
-
-
 
 const AboutMe = () => {
-  const [leftVisible, setLeftVisible] = useState(false);
-  const [rightVisible, setRightVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const leftElement = document.querySelector('.slide-in-left');
-      const rightElement = document.querySelector('.slide-in-right');
-      const windowHeight = window.innerHeight;
-
-      if (leftElement.getBoundingClientRect().top < windowHeight - 200) {
-        setLeftVisible(true);
-      }
-      if (rightElement.getBoundingClientRect().top < windowHeight - 200) {
-        setRightVisible(true);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const { t } = useLanguage();
 
   return (
-    <div className='flex'>
-      <div className={`pt-[15rem] pb-[20rem] ml-[10rem] ${leftVisible ? 'slide-in-left' : ''}`}>
-        <h1 className='text-[40px] flex items-center gap-x-3'>ABOUT ME <GoArrowLeft className='arrow animate-horizontal' /> </h1>
-        <p className='w-[50%] mt-[2rem] text-[18px]'>Hi, i'm Facundo Belsito, a 25 years old Front End Developer from Buenos Aires, Argentina.
-          I'm passionate about creating captivating visual interfaces and implementing dynamic user experiences.
-          My goal is to merge creativity with functionality to deliver innovative digital solutions.
-          My enthusiasm for creating impactful web experiences drives me to blend design and technology to build intuitive and visually appealing interfaces.
-          Thank you for taking the time to get to know me through my portfolio!
-        </p>
-        <button className='rounded-full bg-black text-white w-[20rem] h-[3rem] text-center mt-[2rem] ml-[rem]'>Download CV</button>
+    <section id="about" className="section">
+      <div className="container-pf">
+        <SectionTitle index={1} title={t.about.title} />
+
+        <div className="grid md:grid-cols-[1.4fr_1fr] gap-12 md:gap-16 items-start">
+          <Reveal>
+            <div className="space-y-5 text-slate-300 text-base md:text-lg leading-relaxed">
+              <p>{t.about.p1}</p>
+              <p>{t.about.p2}</p>
+              <p>{t.about.p3}</p>
+            </div>
+
+            <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
+              {t.about.stats.map((s) => (
+                <div key={s.label} className="card p-4 sm:p-5">
+                  <p className="font-display text-2xl sm:text-3xl font-bold text-accent">{s.value}</p>
+                  <p className="mt-1 text-xs sm:text-sm text-slate-400 leading-snug">{s.label}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href={LINKS.cv} download className="btn-primary">
+                <FiDownload /> {t.about.cv}
+              </a>
+              <a href="#contact" className="btn-ghost">
+                {t.about.contact}
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal delay={150} className="flex justify-center md:justify-end">
+            <div className="photo-frame">
+              <img src={LINKS.photo} alt="Facundo Belsito" loading="lazy" />
+            </div>
+          </Reveal>
+        </div>
       </div>
-      <div className={`w-[85%] pt-[15rem] pr-[15rem] ${rightVisible ? 'slide-in-right' : ''}`}>
-        <img className='rounded-full object-cover w-[100%] h-[47%]' src="https://i.postimg.cc/J4ddWMpj/Foto-4x4.jpg" alt="" />
-      </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default AboutMe;

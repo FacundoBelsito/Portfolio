@@ -1,32 +1,70 @@
-import React from 'react'
-import './Inicio.css'
-
+import React from 'react';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { HiOutlineMail, HiOutlineLocationMarker, HiOutlinePhone, HiArrowDown } from 'react-icons/hi';
+import { FiDownload } from 'react-icons/fi';
+import { useLanguage } from '../../i18n/LanguageContext';
+import { LINKS } from '../common/links';
+import './Inicio.css';
 
 const Inicio = () => {
+  const { t } = useLanguage();
+
   return (
-    <div className='bg-black h-[90vh] contenedor'>
+    <section id="top" className="relative min-h-screen flex items-center overflow-hidden">
+      <div className="hero-glow" aria-hidden="true" />
+      <div className="hero-grid" aria-hidden="true" />
 
-      <div className='flex justify-end mr-72 items-center pt-[5rem] '>
-        <div className='ml-[20rem] w-[70%] slide-in-left'>
-          <p className='animate-bounce  text-white border-[blue-400] rounded-[6px] w-[8rem] flex justify-center items-center h-[2rem] bg-cyan-600'>¡Welcome!</p>
-          <h1 className='  text-[#17E1F7] text-[2.3rem] '>Facundo Belsito </h1>
-          <div className='flex gap-x-[3rem] '>
-           <a  target="_blank" href='https://github.com/FacundoBelsito'><img className='w-[3rem]' src="https://i.postimg.cc/R0wh0DBm/Github-icono.png" alt="Mi Imagen" /></a> 
-           <a  target="_blank" href='https://www.linkedin.com/in/facundo-yoel-belsito-echag%C3%BCe-a98459264/'><img className='w-[3rem]' src="https://i.postimg.cc/mZVxQfND/Logo-linkedin-editado.png" alt="Mi Imagen" /></a>
-           <a  target="_blank" href='mailto:facundo.belsito98@gmail.com'><img className='w-[2rem] mt-[0.7rem]' src="https://i.postimg.cc/pV15CB8t/Logo-sobre.png" alt="Mi Imagen" /></a>
+      <div className="relative max-w-6xl mx-auto px-5 md:px-8 pt-28 pb-20 w-full ">
+        <div className="fade-up">
+          <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs text-accent">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+            </span>
+            {t.hero.available}
+          </span>
+
+          <p className="mt-6 text-slate-400 text-lg">{t.hero.greeting}</p>
+          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.05]">
+            Facundo <span className="text-gradient">Belsito</span>
+          </h1>
+          <p className="mt-4 font-mono text-sm sm:text-base text-accent">{t.hero.role}</p>
+          <p className="mt-6 max-w-xl text-slate-300 text-base sm:text-lg leading-relaxed">{t.hero.tagline}</p>
+          <p className="mt-4 flex items-center gap-2 text-sm text-slate-500">
+            <HiOutlineLocationMarker /> {t.hero.location}
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-3">
+            <a href="#contact" className="btn-primary">
+              {t.hero.ctaContact}
+            </a>
+            <a href={LINKS.cv} download className="btn-ghost">
+              <FiDownload /> {t.hero.ctaCv}
+            </a>
           </div>
-          <button className="slide-in-left rounded-full bg-black text-white border border-[#17E1F7] flex items-center justify-center px-20 mt-[2rem] py-2">About me</button>
+
+          <div className="mt-9 flex items-center gap-5 text-2xl text-slate-400">
+            <a href={LINKS.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-accent transition-colors">
+              <FaGithub />
+            </a>
+            <a href={LINKS.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-accent transition-colors">
+              <FaLinkedin />
+            </a>
+            <a href={`mailto:${LINKS.email}`} aria-label="Email" className="hover:text-accent transition-colors">
+              <HiOutlineMail />
+            </a>
+            <a href={LINKS.phoneHref} aria-label={LINKS.phone} className="hover:text-accent transition-colors">
+              <HiOutlinePhone />
+            </a>
+          </div>
         </div>
-        <img className='slide-in-right w-[50%]' src="https://i.postimg.cc/sXXx3Ps4/gif-front-end.gif" alt="" />
-
       </div>
-    </div>
-  )
-}
 
-export default Inicio
+      <a href="#about" aria-label="Scroll" className="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-500 hover:text-accent animate-bounce hidden md:block">
+        <HiArrowDown className="text-2xl" />
+      </a>
+    </section>
+  );
+};
 
-
-
-
-
+export default Inicio;

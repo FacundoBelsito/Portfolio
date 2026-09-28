@@ -1,25 +1,31 @@
-import './App.css'
-import { BrowserRouter } from 'react-router-dom';
+import './App.css';
+import { LanguageProvider } from './i18n/LanguageContext';
 import NavBar from './components/navbar/NavBar';
 import Inicio from './components/inicio/Inicio';
 import AboutMe from './components/aboutme/AboutMe';
+import Experience from './components/experience/Experience';
 import Skills from './components/skills/Skills';
-import Projects from './components/projects/Projects';
+import Education from './components/education/Education';
+import Contact from './components/contact/Contact';
+import Footer from './components/footer/Footer';
+
 function App() {
   return (
-    <div className='app'>
-      <BrowserRouter>
+    <LanguageProvider>
+      <div className="app">
         <NavBar />
-      </BrowserRouter>
-
-      <Inicio/>
-      <AboutMe/>
-      <Skills/>
-      <Projects/>
-    
-    </div>
-    
-  )
+        <main>
+          <Inicio />
+          <AboutMe />
+          <Experience />
+          <Skills />
+          <Education />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
+    </LanguageProvider>
+  );
 }
 
 export default App;

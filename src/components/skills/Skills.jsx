@@ -1,126 +1,100 @@
-import React,{ useEffect, useState} from 'react'
-import { GoArrowLeft } from "react-icons/go"
-import { RiComputerLine } from "react-icons/ri";
-import { FaDatabase } from "react-icons/fa";
-import { TbAbacus } from "react-icons/tb";
+import React from 'react';
+import { FaHtml5, FaCss3Alt, FaReact, FaPython, FaGitAlt, FaGithub, FaSalesforce } from 'react-icons/fa';
+import { IoLogoJavascript } from 'react-icons/io5';
+import { SiTailwindcss, SiMysql, SiFirebase, SiClaude } from 'react-icons/si';
+import { RiOpenaiFill } from 'react-icons/ri';
+import { TbPalette } from 'react-icons/tb';
+import { PiMicrosoftExcelLogoFill, PiMicrosoftWordLogoFill, PiMicrosoftPowerpointLogoFill } from 'react-icons/pi';
+import { HiCheck } from 'react-icons/hi';
+import { useLanguage } from '../../i18n/LanguageContext';
+import SectionTitle from '../common/SectionTitle';
+import Reveal from '../common/Reveal';
 import './Skills.css';
 
+const GROUPS = [
+  {
+    key: 'tools',
+    items: [
+      { name: 'Claude', icon: SiClaude, color: '#d97757' },
+      { name: 'ChatGPT', icon: RiOpenaiFill, color: '#10a37f' },
+      { name: 'Git', icon: FaGitAlt, color: '#f05032' },
+      { name: 'GitHub', icon: FaGithub, color: '#ffffff' },
+      { name: 'Salesforce', icon: FaSalesforce, color: '#00a1e0' },
+      { name: 'Excel', icon: PiMicrosoftExcelLogoFill, color: '#21a366' },
+      { name: 'Word', icon: PiMicrosoftWordLogoFill, color: '#2b7cd3' },
+      { name: 'PowerPoint', icon: PiMicrosoftPowerpointLogoFill, color: '#d35230' },
+      { name: 'Canva', icon: TbPalette, color: '#00c4cc' },
+    ],
+  },
+  {
+    key: 'frontend',
+    items: [
+      { name: 'HTML5', icon: FaHtml5, color: '#e34f26' },
+      { name: 'CSS3', icon: FaCss3Alt, color: '#1572b6' },
+      { name: 'JavaScript', icon: IoLogoJavascript, color: '#f7df1e' },
+      { name: 'React', icon: FaReact, color: '#61dafb' },
+      { name: 'Tailwind', icon: SiTailwindcss, color: '#38bdf8' },
+    ],
+  },
+  {
+    key: 'backend',
+    items: [
+      { name: 'Python', icon: FaPython, color: '#3776ab' },
+      { name: 'MySQL', icon: SiMysql, color: '#4479a1' },
+      { name: 'Firebase', icon: SiFirebase, color: '#ffca28' },
+    ],
+  },
+];
 
 const Skills = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const skillsSection = document.getElementById('skills-section');
-
-      if (!skillsSection) return;
-
-      const sectionTop = skillsSection.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-
-      if (sectionTop < windowHeight * 0.5) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const { t } = useLanguage();
 
   return (
-    <div id="skills-section" className="bg-black pt-[15rem] pb-[20rem] pl-[10rem]">
-      <h1 className="text-white text-[40px] flex items-center gap-x-3">
-        SKILLS <GoArrowLeft className={`arrow ${isVisible ? 'animate-horizontal' : ''}`} />
-      </h1>
-      <h2 className="text-[1.5rem] text-white pt-[2rem] flex items-center gap-x-2">
-        Front-end <RiComputerLine />
-      </h2>
-      <article className="pt-10 w-[100%] flex gap-x-3">
-        {/* Front-end skills */}
-        {/* HTML5 */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/mrNsqCPy/html-5.png" alt="HTML5" />
-          <p className="text-white text-lg mt-[1rem]">HTML5</p>
-        </div>
-        {/* CSS3 */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top2${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/HsbK25VY/social.png" alt="CSS3" />
-          <p className="text-white text-lg mt-[1rem]">CSS3</p>
-        </div>
-        {/* JavaScript */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top3${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/zB1p32FT/Logo-de-javascript.png" alt="JavaScript" />
-          <p className="text-white text-lg mt-[1rem]">JavaScript</p>
-        </div>
-        {/* ReactJS */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top4${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/HxdY3Htn/React-svg.png" alt="ReactJS" />
-          <p className="text-white text-lg mt-[1.5rem]">ReactJS</p>
-        </div>
-        {/* Tailwind */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top5${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/1t3tssVT/tailwindcss-logo-icon-167923.png" alt="Tailwind" />
-          <p className="text-white text-lg mt-[0.7rem]">Tailwind</p>
-        </div>
-        {/* Boostrap */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top6${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/jjK9WjX8/pixelcut-export.png" alt="Bootstrap" />
-          <p className="text-white text-lg mt-[0.7rem]">Bootstrap</p>
-        </div>
-      </article>
+    <section id="skills" className="section">
+      <div className="container-pf">
+        <SectionTitle index={3} title={t.skills.title} subtitle={t.skills.subtitle} />
 
-      <h2 className="text-[1.5rem] text-white pt-[2rem] flex items-center gap-x-2">
-        Back-end <FaDatabase />
-      </h2>
-      <article className="pt-10 w-[100%] flex gap-x-3">
-        {/* Back-end skills */}
-        {/* PHP */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%] mt-[2rem]" src="https://i.postimg.cc/9X4NXfqj/php-1.png" alt="PHP" />
-          <p className="text-white text-lg mt-[1rem]">PHP</p>
-        </div>
-        {/* MySQL */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top2${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/pr8ZfpDh/Mysql-logo.png" alt="MySQL" />
-          <p className="text-white text-lg mt-[1rem]">MySQL</p>
-        </div>
-        {/* Firebase */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top3${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/8cDHbTwZ/logo-firebase-removebg-preview.png" alt="Firebase" />
-          <p className="text-white text-lg mt-[1rem]">Firebase</p>
-        </div>
-      </article>
+        <div className="space-y-12">
+          {GROUPS.map((group) => (
+            <div key={group.key}>
+              <Reveal>
+                <h3 className="font-mono text-sm uppercase tracking-widest text-slate-400 mb-5">
+                  {t.skills.groups[group.key]}
+                </h3>
+              </Reveal>
+              <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+                {group.items.map(({ name, icon: Icon, color }, i) => (
+                  <Reveal key={name} delay={i * 50}>
+                    <div className="skill-card card" style={{ '--skill-color': color }}>
+                      <Icon className="text-3xl sm:text-4xl skill-icon" />
+                      <span className="mt-3 text-xs sm:text-sm text-slate-300">{name}</span>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          ))}
 
-      <h2 className="text-[1.5rem] text-white pt-[2rem] flex items-center gap-x-2">
-        Other technologies <TbAbacus />
-      </h2>
-      <article className="pt-10 w-[100%] flex gap-x-3">
-        {/* Other technologies */}
-        {/* GitHub */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[50%] mt-[2rem]" src="https://i.postimg.cc/pVzzB99C/logo-git-hub-va.png" alt="GitHub" />
-          <p className="text-white text-lg mt-[1rem]">GitHub</p>
+          <div>
+            <Reveal>
+              <h3 className="font-mono text-sm uppercase tracking-widest text-slate-400 mb-5">
+                {t.skills.groups.soft}
+              </h3>
+            </Reveal>
+            <Reveal>
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                {t.skills.soft.map((s) => (
+                  <li key={s} className="card px-4 py-3 flex items-center gap-3 text-slate-300">
+                    <HiCheck className="text-accent shrink-0" /> {s}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
         </div>
-        {/* Canva */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top2${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/8zK6CM3p/Canva-logo.png" alt="Canva" />
-          <p className="text-white text-lg mt-[0.5rem]">Canva</p>
-        </div>
-        {/* Photoshop */}
-        <div className={`bg-gray-500 rounded-lg p-6 flex items-center shadow-md w-[10%] flex flex-col slide-in-top3${isVisible ? '' : ' hidden'}`}>
-          <img className="w-[80%]" src="https://i.postimg.cc/vmnZdnwS/Adobe-Photoshop-CC-icon-svg.png" alt="Photoshop" />
-          <p className="text-white text-lg mt-[1rem]">Photoshop</p>
-        </div>
-      </article>
-    </div>
+      </div>
+    </section>
   );
 };
 
 export default Skills;
-
-
